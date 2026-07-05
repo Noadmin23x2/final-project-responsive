@@ -1,179 +1,86 @@
-/* ==========================================================================
-   1. GIAO DIỆN MẶC ĐỊNH (Mobile First) - Không dùng Media Query cho Mobile
-   ========================================================================== */
 body {
     background-color: #dedede;
-    color: #333333;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 15px;
-    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 h1 {
     text-align: center;
+    font-family:Arial, sans-serif;
     font-size: 32px;
-    margin-top: 20px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    font-family:Arial, sans-serif;
 }
 
 p {
-    font-size: 20px;
     text-align: center;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 15px auto;
+   font-size: 25px;
+   font-family:Arial, sans-serif;
 }
 
-/* Yêu cầu: Sử dụng một cột Grid với khoảng cách gap là 10px */
-.grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin: 30px auto;
-    max-width: 1200px;
+img{
+  width:100%;
+  display: block;
 }
 
-figure {
-    margin: 0;
-    padding: 15px;
-    background-color: #ffffff;
-    border: 2px solid #cccccc;
-    text-align: center;
-    box-sizing: border-box;
-    transition: background-color 0.3s, border-color 0.3s;
+.grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
 }
 
-figure img {
-    width: 100%;
-    height: auto;
-    display: block;
+figure{
+    border:2px solid gray;
+    padding:10px;
+    background:white;
+    text-align:center;
+}
+@media screen and (min-width:772px){
+
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    figure{
+        border-radius:50%;
+    }
+
+    .grid figure:last-child{
+        grid-column:1 / span 2;
+    }
+
 }
 
-figcaption {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
+@media screen and (min-width:992px){
+
+    figure{
+        border-radius:0;
+    }
+
+    .grid figure:nth-child(3n){
+        grid-column:1 / span 2;
+    }
+
 }
 
-footer {
-    text-align: center;
-    margin: 40px 0;
+@media (prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
 }
+@media (prefers-color-scheme:dark){
 
-footer a {
-    color: #000000;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* ==========================================================================
-   2. GIAO DIỆN TABLET - Kích hoạt tại điểm gãy 772px
-   ========================================================================== */
-@media (min-width: 772px) {
-    /* Yêu cầu: Sử dụng Grid 2 cột */
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Yêu cầu: Thiết lập border radius cho các figure để tạo hình tròn */
-    figure {
-        border-radius: 50%;
-        overflow: hidden;
-        aspect-ratio: 1 / 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    figure img {
-        width: 70%;
-        height: 70%;
-        object-fit: cover;
-        border-radius: 50%;
-    }
-
-    /* Yêu cầu: Đặt figure cuối cùng chiếm cả 2 cột */
-    .grid figure:last-child {
-        grid-column: span 2;
-        aspect-ratio: auto;
-        border-radius: 20px; /* Bo cong nhẹ để cân bằng thẩm mỹ khi trải dài */
-    }
-
-    .grid figure:last-child img {
-        width: 50%;
-        height: auto;
-        border-radius: 10px;
-    }
-}
-
-/* ==========================================================================
-   3. GIAO DIỆN MÀN HÌNH LỚN - Kích hoạt tại điểm gãy 992px (Tuyệt đối không dùng max-width)
-   ========================================================================== */
-@media (min-width: 992px) {
-    /* Yêu cầu: Sử dụng Grid 3 cột */
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    /* Yêu cầu: Loại bỏ hoàn toàn border radius khỏi các figure */
-    figure {
-        border-radius: 0;
-        aspect-ratio: auto;
-        display: block;
-    }
-
-    figure img {
-        width: 100%;
-        height: 220px; /* Cố định chiều cao hình ảnh cho đều nhau, cực kỳ đẹp mắt */
-        object-fit: cover;
-        border-radius: 0;
-    }
-
-    /* Yêu cầu: Đặt mỗi hình thứ 3 (3n) chiếm hai cột (Tạo nên giao diện như trong image_012899.jpg) */
-    .grid figure:nth-child(3n) {
-        grid-column: span 2;
-    }
-    
-    .grid figure:nth-child(3n) img {
-        height: 350px; /* Hình lớn chiếm 2 cột thì tăng chiều cao để không bị bẹt ảnh */
-    }
-
-    /* Reset lại thuộc tính của hình cuối cùng từ tablet để khớp layout màn hình lớn */
-    .grid figure:last-child {
-        grid-column: span 2; 
-    }
-}
-
-/* ==========================================================================
-   4. GIẢM CHUYỂN ĐỘNG (Prefers Reduced Motion)
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-    /* Yêu cầu: Loại bỏ hành vi cuộn mượt (scroll behavior) */
-    html {
-        scroll-behavior: auto !important;
-    }
-}
-
-/* ==========================================================================
-   5. CHẾ ĐỘ TỐI (Prefers Color Scheme: Dark)
-   ========================================================================== */
-@media (prefers-color-scheme: dark) {
-    /* Đồng bộ nền trang tối như trong hình chụp thực tế của bạn */
-    body {
-        background-color: #121212;
-        color: #e0e0e0;
-    }
-
-    h1, footer a {
-        color: #ffffff;
-    }
-
-    /* Yêu cầu bài tập đối với Thẻ Figure trong Dark Mode: */
-    figure {
-        background-color: #222222; /* 1. Đổi nền figure sang màu tối */
-        color: #fff2a3;            /* 2. Đổi chữ sang màu sáng/vàng nhạt */
-        border-color: #000000;     /* 3. Đổi viền figure thành màu đen */
+    figure{
+        background:#333;
+        color:#ffff99;
+        border:2px solid black;
     }
 }
