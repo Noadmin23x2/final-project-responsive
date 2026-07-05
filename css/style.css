@@ -1,143 +1,155 @@
+/* --- Giao diện mặc định (Mobile First) --- */
 body {
     background-color: #dedede;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
 }
 
 h1 {
     text-align: center;
-    font-family:Arial, sans-serif;
     font-size: 32px;
 }
 
 a {
     color: #000;
     text-decoration: none;
-    font-family:Arial, sans-serif;
 }
 
 p {
-   font-size: 25px;
-   font-family:Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 15px auto;
 }
 
-img{
-  width:100%;
-}
-
-
-p{
-  text-align:center;
-}
-
-div img{
-    width:150px;
-    height: 150px;
-    display:block;
-    margin:auto;
-}
-
-div{
-  display: inline-block;
-  width: 24%;
-  margin: 5px;
-  padding: 2px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-main {
-    border: 5px #000 solid;
-    margin: 10px;
-}
- */
-/* 
-
-.container {
+/* Cấu hình Grid 1 cột cho Mobile */
+.grid {
     display: grid;
     grid-template-columns: 1fr;
-    justify-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 1200px;
 }
- */
-/* img{
-    width: 200px;
-    height: 200px;
-    padding: 5px;
-} */
 
-/* .child {
-    position: relative;
-    display: inline-block;
-    border: 5px black solid;
-    margin: 5px;
-    border-radius: 5px;
-} */
-
-/* 
-
-.label {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 40%;
-} */
-/* 
-.button {
-    display: inline-block;
-    border: 2px solid #000;
-    padding: 5px;
-    border-radius: 25px;
+figure {
+    margin: 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    text-align: center;
 }
- */
-/* 
-.button:hover {
-    background-color:#fff;
-} */
 
-/* 
-footer {
-    display: flex;
-    justify-content: center;
-} */
-
-/* 
-header {
-    border-radius: 5px;
-    border: 5px #000 solid;
-    margin: 10px;
-} */
-
-/* 
-.label {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 40%;
-} */
-/* 
-.child:hover .label {
+figure img {
+    width: 100%;
+    height: auto;
     display: block;
-} */
+}
+
+figcaption {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    margin: 30px 0;
+}
+
+
+/* --- Giao diện Tablet (Kích hoạt từ 772px) --- */
+@media (min-width: 772px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    figure {
+        border-radius: 50%;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    figure img {
+        width: 65%;
+        height: 65%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    /* Phần tử cuối cùng chiếm cả 2 cột */
+    .grid figure:last-child {
+        grid-column: span 2;
+        aspect-ratio: auto;
+        border-radius: 20px; 
+    }
+    
+    .grid figure:last-child img {
+        width: 50%;
+        height: auto;
+        border-radius: 10px;
+    }
+}
+
+
+/* --- Giao diện Màn hình lớn (Kích hoạt từ 992px) --- */
+@media (min-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Reset lại các thuộc tính hình tròn từ giao diện tablet */
+    figure {
+        border-radius: 0;
+        aspect-ratio: auto;
+        display: block;
+    }
+
+    figure img {
+        width: 100%;
+        height: auto;
+        object-fit: fill;
+        border-radius: 0;
+    }
+
+    /* Mỗi hình thứ 3 (3n) sẽ chiếm 2 cột */
+    .grid figure:nth-child(3n) {
+        grid-column: span 2;
+    }
+
+    /* Reset lại thuộc tính của hình cuối cùng từ tablet để không bị lỗi layout */
+    .grid figure:last-child {
+        grid-column: span 2; 
+    }
+}
+
+
+/* --- Tùy chỉnh hỗ trợ giảm chuyển động (Prefers Reduced Motion) --- */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* --- Tùy chỉnh Chế độ tối (Prefers Color Scheme: Dark) --- */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+
+    h1, a {
+        color: #ffffff;
+    }
+
+    figure {
+        background-color: #2d2d2d;
+        color: #fff2a3; /* Màu chữ vàng nhạt */
+        border-color: #000000; /* Viền đen */
+    }
+}
